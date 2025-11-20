@@ -77,6 +77,11 @@ def main():
 #        schools_filtered.columns = ['School Name',"TIF Surplus ($552m)", "TIF Surplus ($387m)","Mid Year Cuts",'Ward',"Alder","Number of Students","Percent Non-White"]
         schools_filtered.columns = ['School Name',"Dollars Lost","Positions Cut",'Ward',"Alder","Number of Students","Percent Non-White"]
 
+        if selected_schools == []:
+            total_positions = schools_filtered['Positions Cut']
+            st.markdown(f"""**Chicago Public Schools** will stand to lose **$552 million** and **{total} positions**.
+""",unsafe_allow_html=True)
+            
         if selected_schools != []:
             n = len(schools_filtered['School Name'])
             if n == 1:
@@ -229,4 +234,5 @@ def main():
     """, unsafe_allow_html=True)
 
 if __name__ == "__main__":
+
     main()
