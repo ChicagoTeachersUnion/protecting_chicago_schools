@@ -80,7 +80,7 @@ def main():
         if selected_schools == []:
 
             total_positions = schools_filtered['Positions Cut'].sum()
-            st.markdown(f"""**Chicago Public Schools** will stand to lose **$552 million** and **{total_positions} positions**.
+            st.markdown(f"""**Chicago Public Schools** will stand to lose **$552 million** and **{total_positions:,.0f} positions**.
 """,unsafe_allow_html=True)
             
         if selected_schools != []:
@@ -237,6 +237,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
