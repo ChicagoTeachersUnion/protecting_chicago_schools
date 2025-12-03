@@ -255,7 +255,7 @@ def main():
             st.markdown(f""" Schools in Alder <b>{alder}'s</b> Ward ({ward}) will stand to lose **${ward_filtered['Dollars Lost'].iloc[0]:,.0f}** and **{ward_filtered['Positions Cut'].iloc[0]} positions**. This will affect **{ward_filtered['Number of Students'].iloc[0]:,.0f}** students of which **{ward_filtered['Percent Non-White'].iloc[0]:.0%}** are non-white.
     """, unsafe_allow_html=True)
 
-            Add PDF download button
+    #        Add PDF download button
             school_count = len(ward_filtered) - 1  # Subtract 1 for the total row
             student_count = int(ward_filtered['Number of Students'].iloc[0])
             funding_loss = ward_filtered['Dollars Lost'].iloc[0]
@@ -311,6 +311,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
