@@ -145,6 +145,48 @@ def main():
 
         st.subheader("Ward 🏛️")
 
+        def generate_pdf(ward, school_count, student_count, funding_loss, position_loss):
+            """Generate PDF flyer for a ward"""
+            try:
+                # Use relative paths so it works on Streamlit Cloud
+                template_path = "."
+                css_path = "styles.css"
+                
+                context = {
+                    'ward': ward,
+                    'school_count': school_count,
+                    'student_count': student_count,
+                    'funding_loss': f"{funding_loss:,.0f}",
+                    'position_loss': position_loss
+                }
+                
+                template_loader = jinja2.FileSystemLoader(searchpath=template_path)
+                template_env = jinja2.Environment(loader=template_loader)
+                template = template_env.get_template("protect_chicago_flyer_template.html")
+                
+                html_content = template.render(context)
+                
+                config = pdfkit.configuration(wkhtmltopdf=r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe')
+                
+                options = {
+                    'enable-local-file-access': True,
+                    'encoding': 'UTF-8',
+                }
+                
+                # Generate PDF to bytes
+                pdf_bytes = pdfkit.from_string(
+                    html_content,
+                    False,  # False means return bytes instead of saving to file
+                    configuration=config,
+                    options=options,
+                    css=css_path
+                )
+                
+                return pdf_bytes
+            except Exception as e:
+                st.error(f"Error generating PDF: {e}")
+                return None
+
         ward = df[['unit_name','ward','alder_first_last','tif_surplus_552_m','tif_surplus_387_m','mid_year_cuts','student_count','White #','non_white_per']]
 
         # Sort ward options ascending
@@ -200,6 +242,23 @@ def main():
             st.markdown(f""" Schools in Alder <b>{alder}'s</b> Ward ({ward}) will stand to lose **${ward_filtered['Dollars Lost'].iloc[0]:,.0f}** and **{ward_filtered['Positions Cut'].iloc[0]} positions**. This will affect **{ward_filtered['Number of Students'].iloc[0]:,.0f}** students of which **{ward_filtered['Percent Non-White'].iloc[0]:.0%}** are non-white.
     """, unsafe_allow_html=True)
 
+            # Add PDF download button
+            school_count = len(ward_filtered) - 1  # Subtract 1 for the total row
+            student_count = int(ward_filtered['Number of Students'].iloc[0])
+            funding_loss = ward_filtered['Dollars Lost'].iloc[0]
+            position_loss = int(ward_filtered['Positions Cut'].iloc[0])
+            
+            pdf_bytes = generate_pdf(select_ward, school_count, student_count, funding_loss, position_loss)
+            
+            if pdf_bytes:
+                st.download_button(
+                    label="📄 Download Ward Fact Sheet (PDF)",
+                    data=pdf_bytes,
+                    file_name=f"protecting_chicago_ward_{select_ward}_fact_sheet.pdf",
+                    mime="application/pdf",
+                    help="Download a PDF fact sheet for this ward"
+                )
+
             # Highlight Ward Total row
 
             def highlight_row(s):
@@ -216,6 +275,8 @@ def main():
             "Number of Students" : "{:,.0f}",
             "Percent Non-White": "{:.0%}"}),
             hide_index=True)
+
+    
 
     st.markdown("""
     <style>
@@ -237,6 +298,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
