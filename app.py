@@ -7,6 +7,8 @@ import geopandas as gpd
 from shapely.geometry import shape
 import jinja2
 import pdfkit
+import os
+import shutil
 
 # Load data
 @st.cache_data
@@ -168,7 +170,16 @@ def main():
                 
                 html_content = template.render(context)
                 
-                config = pdfkit.configuration(wkhtmltopdf=r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe')
+                # Detect if running on Streamlit Cloud or locally
+
+                
+                wkhtmltopdf_path = shutil.which('wkhtmltopdf')  # Find wkhtmltopdf in PATH
+                
+                if wkhtmltopdf_path is None:
+                    # Local Windows installation
+                    wkhtmltopdf_path = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
+                
+                config = pdfkit.configuration(wkhtmltopdf=wkhtmltopdf_path)
                 
                 options = {
                     'enable-local-file-access': True,
@@ -300,6 +311,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
