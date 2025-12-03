@@ -149,56 +149,56 @@ def main():
 
         st.subheader("Ward 🏛️")
 
-        def generate_pdf(ward, school_count, student_count, funding_loss, position_loss):
-            """Generate PDF flyer for a ward"""
-            try:
-                # Use relative paths so it works on Streamlit Cloud
-                template_path = "."
-                css_path = "styles.css"
+        # def generate_pdf(ward, school_count, student_count, funding_loss, position_loss):
+        #     """Generate PDF flyer for a ward"""
+        #     try:
+        #         # Use relative paths so it works on Streamlit Cloud
+        #         template_path = "."
+        #         css_path = "styles.css"
                 
-                context = {
-                    'ward': ward,
-                    'school_count': school_count,
-                    'student_count': student_count,
-                    'funding_loss': f"{funding_loss:,.0f}",
-                    'position_loss': position_loss
-                }
+        #         context = {
+        #             'ward': ward,
+        #             'school_count': school_count,
+        #             'student_count': student_count,
+        #             'funding_loss': f"{funding_loss:,.0f}",
+        #             'position_loss': position_loss
+        #         }
                 
-                template_loader = jinja2.FileSystemLoader(searchpath=template_path)
-                template_env = jinja2.Environment(loader=template_loader)
-                template = template_env.get_template("protect_chicago_flyer_template.html")
+        #         template_loader = jinja2.FileSystemLoader(searchpath=template_path)
+        #         template_env = jinja2.Environment(loader=template_loader)
+        #         template = template_env.get_template("protect_chicago_flyer_template.html")
                 
-                html_content = template.render(context)
+        #         html_content = template.render(context)
                 
-                # Detect if running on Streamlit Cloud or locally
+        #         # Detect if running on Streamlit Cloud or locally
 
                 
-                wkhtmltopdf_path = shutil.which('wkhtmltopdf')  # Find wkhtmltopdf in PATH
+        #         wkhtmltopdf_path = shutil.which('wkhtmltopdf')  # Find wkhtmltopdf in PATH
                 
-                if wkhtmltopdf_path is None:
-                    # Local Windows installation
-                    wkhtmltopdf_path = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
+        #         if wkhtmltopdf_path is None:
+        #             # Local Windows installation
+        #             wkhtmltopdf_path = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
                 
-                config = pdfkit.configuration(wkhtmltopdf=wkhtmltopdf_path)
+        #         config = pdfkit.configuration(wkhtmltopdf=wkhtmltopdf_path)
                 
-                options = {
-                    'enable-local-file-access': True,
-                    'encoding': 'UTF-8',
-                }
+        #         options = {
+        #             'enable-local-file-access': True,
+        #             'encoding': 'UTF-8',
+        #         }
                 
-                # Generate PDF to bytes
-                pdf_bytes = pdfkit.from_string(
-                    html_content,
-                    False,  # False means return bytes instead of saving to file
-                    configuration=config,
-                    options=options,
-                    css=css_path
-                )
+        #         # Generate PDF to bytes
+        #         pdf_bytes = pdfkit.from_string(
+        #             html_content,
+        #             False,  # False means return bytes instead of saving to file
+        #             configuration=config,
+        #             options=options,
+        #             css=css_path
+        #         )
                 
-                return pdf_bytes
-            except Exception as e:
-                st.error(f"Error generating PDF: {e}")
-                return None
+        #         return pdf_bytes
+        #     except Exception as e:
+        #         st.error(f"Error generating PDF: {e}")
+        #         return None
 
         ward = df[['unit_name','ward','alder_first_last','tif_surplus_552_m','tif_surplus_387_m','mid_year_cuts','student_count','White #','non_white_per']]
 
@@ -256,21 +256,21 @@ def main():
     """, unsafe_allow_html=True)
 
             # Add PDF download button
-            school_count = len(ward_filtered) - 1  # Subtract 1 for the total row
-            student_count = int(ward_filtered['Number of Students'].iloc[0])
-            funding_loss = ward_filtered['Dollars Lost'].iloc[0]
-            position_loss = int(ward_filtered['Positions Cut'].iloc[0])
+            # school_count = len(ward_filtered) - 1  # Subtract 1 for the total row
+            # student_count = int(ward_filtered['Number of Students'].iloc[0])
+            # funding_loss = ward_filtered['Dollars Lost'].iloc[0]
+            # position_loss = int(ward_filtered['Positions Cut'].iloc[0])
             
-            pdf_bytes = generate_pdf(select_ward, school_count, student_count, funding_loss, position_loss)
+            # pdf_bytes = generate_pdf(select_ward, school_count, student_count, funding_loss, position_loss)
             
-            if pdf_bytes:
-                st.download_button(
-                    label="📄 Download Ward Fact Sheet (PDF)",
-                    data=pdf_bytes,
-                    file_name=f"protecting_chicago_ward_{select_ward}_fact_sheet.pdf",
-                    mime="application/pdf",
-                    help="Download a PDF fact sheet for this ward"
-                )
+            # if pdf_bytes:
+            #     st.download_button(
+            #         label="📄 Download Ward Fact Sheet (PDF)",
+            #         data=pdf_bytes,
+            #         file_name=f"protecting_chicago_ward_{select_ward}_fact_sheet.pdf",
+            #         mime="application/pdf",
+            #         help="Download a PDF fact sheet for this ward"
+            #     )
 
             # Highlight Ward Total row
 
@@ -311,6 +311,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
