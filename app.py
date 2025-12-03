@@ -172,13 +172,13 @@ def main():
                 
                 # Detect if running on Streamlit Cloud or locally
 
-                if platform.system() == 'Windows':
-                    # Local Windows installation
-                    wkhtmltopdf_path = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
-                    config = pdfkit.configuration(wkhtmltopdf=wkhtmltopdf_path)
+               # On Streamlit Cloud, wkhtmltopdf is installed via packages.txt
+                # and available at /usr/bin/wkhtmltopdf
+                if os.path.exists('/usr/bin/wkhtmltopdf'):
+                    config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltopdf')
                 else:
-                    # Linux (Streamlit Cloud) - wkhtmltopdf should be in PATH
-                    config = pdfkit.configuration()
+                    # Local development (Windows)
+                    config = pdfkit.configuration(wkhtmltopdf=r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe')
                 
                 options = {
                     'enable-local-file-access': True,
@@ -310,6 +310,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
