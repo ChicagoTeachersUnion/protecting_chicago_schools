@@ -175,9 +175,9 @@ def main():
                 
                 wkhtmltopdf_path = shutil.which('wkhtmltopdf')  # Find wkhtmltopdf in PATH
                 
-                if wkhtmltopdf_path is None:
-                    # Local Windows installation
-                    wkhtmltopdf_path = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
+                # if wkhtmltopdf_path is None:
+                #     # Local Windows installation
+                #     wkhtmltopdf_path = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
                 
                 config = pdfkit.configuration(wkhtmltopdf=wkhtmltopdf_path)
                 
@@ -311,6 +311,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
