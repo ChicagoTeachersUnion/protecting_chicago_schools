@@ -1,0 +1,59 @@
+<head>
+    <title>Protecting Chicago Ward {{ward}} Fact Sheets</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="\cropped-CTUseal-black-on-white-32x32.png">
+</head>
+<body>
+<h1>
+    <div class="columns">
+        <div class="column_a">
+            <h1>PROTECTING
+            <br><span>CHICAGO</span>
+            <br>SCHOOLS</h1>
+        </div>
+        <div class="column_b">
+            <h1><span>WARD</span>
+            <br>{{ward}}
+            <br><span>FACTS</span></h1>
+        </div>
+        <div class="column_c">
+            <img src="https://www.ctulocal1.org/wp-content/uploads/2018/09/CTUfull-blackred-1.png" alt="Chicago Teachers Union" class="logo">
+        </div>
+    </div>
+</h1>
+    <h2>
+        What we know (the big picture)
+    </h2>
+    <p>
+        <ul>
+            <li><b>Voters prefer investment over cuts</b>: When asked to choose between cutting education or taxing corporations, <mark>over 80% of Chicagoans choose taxing ultra-wealthy corporations.</mark></li>
+            <li><b>Even stronger support in communities of color</b>: <mark>More than 90% of Black and Latine voters prefer taxing corporations</mark> over cutting education.</li>
+            <li><b>Voters reward investment</b>: Polling shows <mark>voter favorability rises for Alders who support equitable funding increases</mark>.</li>
+            <li><b>Protecting Chicago invests&ndash;it doesn&apos;t cut</b>: Mayor Brandon Johnson&apos;s budget protects against Trump cuts and <mark>expands youth jobs, healthcare, and violence prevention by both making ultra-wealthy corporations pay a community safety surcharge and delivering a historic billion-dollar TIF surplus</mark> to schools, parks, and libraries.</li>
+            <li>Chicago&apos;s largest corporations received over $100 million in property tax cuts this year alone and will receive billions in Trump tax cuts.</li>
+            <li><b>A &apos;no&apos; vote means cuts</b>: <mark>Voting "no" to TIF surplus and the Community Safety Surcharge is a vote <i>for</i> cuts, period.</mark> A no vote takes money from youth jobs and programming, books for libraries, and gender-based violence reduction programs.</li>
+            <li><b>A &apos;yes&apos; vote means investing in our youth and city</b>: Voting for TIF surplus and the Community Safety Surcharge means investing in our schools and city by utilizing unused TIF funds and making ultra-rich corporations pay their fair share.</li>
+        </ul>
+    </p>
+    <h2>
+        What we know (about your ward)
+    </h2>
+    <p>
+       Here's a snapshot of how a "no" vote to TIF surplus and the Community Safety Surcharge will impact the <span style="color: red; font-weight: bold;">{{school_count}}</span> schools and <span style="color: red; font-weight: bold;">{{student_count}}</span> students in your ward: 
+    </p>
+    <p>
+        <b>SCHOOL FUNDING LOSS</b>.............<span style="color: red; font-weight: bold;">${{funding_loss}}</span>
+    </p>
+    <p>
+        <b>SCHOOL POSITION LOSS</b>...............<span style="color: red; font-weight: bold;">{{position_loss}}</span>
+    </p>
+
+<footer>
+    <p>These statistics can be found for your ward and others at our <a href="https://protectingchicagoschools.com/">Protecting Chicago Schools Calculator</a> (protectingchicagoschools.com).</a>
+</footer>
+</body>
+
