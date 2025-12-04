@@ -233,15 +233,21 @@ def main():
             position_loss = int(ward_filtered['Positions Cut'].iloc[0])
             
             html_content = generate_html(select_ward, school_count, student_count, funding_loss, position_loss)
+
+            # Linking to PDFs
+
+            ward_pdf_url = f"https://chicagoteachersunion.github.io/ward{ward}.pdf"
+
+            st.link_button("⬇️ Download Ward Fact Sheet", ward_pdf_url)
             
-            if html_content:
-                st.download_button(
-                    label="⬇️ Download Ward Fact Sheet",
-                    data=html_content,
-                    file_name=f"protecting_chicago_ward_{select_ward}_fact_sheet.html",
-                    mime="text/html",
-                    help="Download an HTML fact sheet for this ward"
-                )
+            # if html_content:
+            #     st.download_button(
+            #         label="⬇️ Download Ward Fact Sheet",
+            #         data=html_content,
+            #         file_name=f"protecting_chicago_ward_{select_ward}_fact_sheet.html",
+            #         mime="text/html",
+            #         help="Download an HTML fact sheet for this ward"
+            #     )
 
             # Highlight Ward Total row
 
@@ -282,6 +288,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
