@@ -1,8 +1,8 @@
 [theme]
-base="light"
-backgroundColor="white"
-secondaryBackgroundColor="lavender"
-codeBackgroundColor="powderBlue"
+base="dark"
+#backgroundColor="white"
+#secondaryBackgroundColor="lavender"
+#codeBackgroundColor="powderBlue"
 
 [theme.sidebar]
 backgroundColor="ghostWhite"
