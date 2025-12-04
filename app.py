@@ -236,7 +236,7 @@ def main():
             
             if html_content:
                 st.download_button(
-                    label="📄 Download Ward Fact Sheet",
+                    label="⬇️ Download Ward Fact Sheet",
                     data=html_content,
                     file_name=f"protecting_chicago_ward_{select_ward}_fact_sheet.html",
                     mime="text/html",
@@ -282,6 +282,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
